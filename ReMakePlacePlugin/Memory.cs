@@ -77,20 +77,20 @@ public unsafe class Memory
         if (!Svc.Data.GetExcelSheet<TerritoryType>().TryGetRow(territoryId, out var row)) return null;
 
         var placeName = row.Name.ToString();
-        var sizeName = placeName.Substring(1, 3);
+        var sizeName = placeName.Substring(2, 2);
 
         switch (sizeName)
         {
-            case "1i1":
+            case "i1":
                 return "Small";
 
-            case "1i2":
+            case "i2":
                 return "Medium";
 
-            case "1i3":
+            case "i3":
                 return "Large";
 
-            case "1i4":
+            case "i4":
                 return "Apartment";
 
             default:
