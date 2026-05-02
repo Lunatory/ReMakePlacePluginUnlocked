@@ -168,28 +168,35 @@ public unsafe class Memory
         var objectListAddr = (IntPtr)(&mgr->ObjectList);
         var activeObjList = (IntPtr)(mgr->Objects) - 0x08;
 
-        var exteriorItems = Memory.GetContainer(InventoryType.HousingExteriorPlacedItems);
-
-        for (int i = 0; i < exteriorItems->Size; i++)
+        var exteriorItemInventories = new[]
         {
-            var item = exteriorItems->GetInventorySlot(i);
-            if (item == null || item->ItemId == 0) continue;
+            (InventoryType.HousingExteriorPlacedItems, 0),
+            (InventoryType.HousingExteriorPlacedItems2, 40)
+        };
 
-            var itemInfoIndex = GetYardIndex(mgr->Plot, (byte)i);
-
-            var itemInfo = HousingObjectManager.GetItemInfo(mgr, itemInfoIndex);
-            if (itemInfo == null) continue;
-
-            var gameObj = (HousingGameObject*)GetObjectFromIndex(activeObjList, (uint)itemInfo->Index);
-            if (gameObj == null) gameObj = (HousingGameObject*)GetGameObject(objectListAddr, itemInfoIndex);
-
-            if (gameObj != null)
+        foreach (var (exteriorItemInventory, offset) in exteriorItemInventories)
+        {
+            var exteriorItemContainer = Memory.GetContainer(exteriorItemInventory);
+            for (int i = 0; i < exteriorItemContainer->Size; i++)
             {
-                objects.Add(*gameObj);
+                var item = exteriorItemContainer->GetInventorySlot(i);
+                if (item == null || item->ItemId == 0) continue;
+
+                var itemInfoIndex = GetYardIndex(mgr->Plot, (byte)(i + offset));
+
+                var itemInfo = HousingObjectManager.GetItemInfo(mgr, itemInfoIndex);
+                if (itemInfo == null) continue;
+
+                var gameObj = (HousingGameObject*)GetObjectFromIndex(activeObjList, (uint)itemInfo->Index);
+                if (gameObj == null) gameObj = (HousingGameObject*)GetGameObject(objectListAddr, itemInfoIndex);
+
+                if (gameObj != null)
+                {
+                    objects.Add(*gameObj);
+                }
+
             }
-
         }
-
         return objects;
     }
 

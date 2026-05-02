@@ -1107,7 +1107,7 @@ public class ReMakePlacePlugin : IDalamudPlugin
         var activeObjList = (IntPtr)(mgr->Objects) - 0x08;
 
         var exteriorItems = Memory.GetContainer(InventoryType.HousingExteriorPlacedItems);
-
+        var exteriorItems2 = Memory.GetContainer(InventoryType.HousingExteriorPlacedItems2);
         GetPlotLocation();
 
         var rotateVector = Quaternion.CreateFromAxisAngle(Vector3.UnitY, PlotLocation.rotation);
@@ -1129,61 +1129,72 @@ public class ReMakePlacePlugin : IDalamudPlugin
         Layout.exteriorScale = 1;
         Layout.properties["entranceLayout"] = PlotLocation.entranceLayout;
 
-        for (int i = 0; i < exteriorItems->Size; i++)
+        // in hopes of more slots again in the future...
+        var exteriorItemInventories = new[]
         {
-            var item = exteriorItems->GetInventorySlot(i);
-            if (item == null || item->ItemId == 0) continue;
+            (InventoryType.HousingExteriorPlacedItems, 0),
+            (InventoryType.HousingExteriorPlacedItems2, 40)
+        };
 
-            if (!Svc.Data.GetExcelSheet<Item>().TryGetRow(item->ItemId, out var itemRow)) continue;
+        foreach (var (exteriorItemInventory, offset) in exteriorItemInventories)
+        {
+            var exteriorItemContainer = Memory.GetContainer(exteriorItemInventory);
 
-            var itemInfoIndex = GetYardIndex(mgr->Plot, (byte)i);
-
-            var itemInfo = HousingObjectManager.GetItemInfo(mgr, itemInfoIndex);
-            if (itemInfo == null)
+            for (int i = 0; i < exteriorItemContainer->Size; i++)
             {
-                continue;
-            }
+                var item = exteriorItemContainer->GetInventorySlot(i);
+                if (item == null || item->ItemId == 0) continue;
 
-            var location = new Vector3(itemInfo->Position.X, itemInfo->Position.Y, itemInfo->Position.Z);
+                if (!Svc.Data.GetExcelSheet<Item>().TryGetRow(item->ItemId, out var itemRow)) continue;
 
-            var newLocation = Vector3.Transform(location - PlotLocation.ToVector(), rotateVector);
+                var itemInfoIndex = GetYardIndex(mgr->Plot, (byte)(i + offset));
 
-            var housingItem = new HousingItem(
-                itemRow,
-                item->Stains[0],
-                newLocation.X,
-                newLocation.Y,
-                newLocation.Z,
-                itemInfo->Rotation + PlotLocation.rotation
-            );
+                var itemInfo = HousingObjectManager.GetItemInfo(mgr, itemInfoIndex);
+                if (itemInfo == null)
+                {
+                    continue;
+                }
 
-            var gameObj = (HousingGameObject*)GetObjectFromIndex(activeObjList, (uint)itemInfo->Index);
+                var location = new Vector3(itemInfo->Position.X, itemInfo->Position.Y, itemInfo->Position.Z);
 
-            if (gameObj == null)
-            {
-                gameObj = (HousingGameObject*)GetGameObject(objectListAddr, itemInfoIndex);
+                var newLocation = Vector3.Transform(location - PlotLocation.ToVector(), rotateVector);
+
+                var housingItem = new HousingItem(
+                    itemRow,
+                    item->Stains[0],
+                    newLocation.X,
+                    newLocation.Y,
+                    newLocation.Z,
+                    itemInfo->Rotation + PlotLocation.rotation
+                );
+
+                var gameObj = (HousingGameObject*)GetObjectFromIndex(activeObjList, (uint)itemInfo->Index);
+
+                if (gameObj == null)
+                {
+                    gameObj = (HousingGameObject*)GetGameObject(objectListAddr, itemInfoIndex);
+
+                    if (gameObj != null)
+                    {
+
+                        location = new Vector3(gameObj->X, gameObj->Y, gameObj->Z);
+
+                        newLocation = Vector3.Transform(location - PlotLocation.ToVector(), rotateVector);
+
+                        housingItem.X = newLocation.X;
+                        housingItem.Y = newLocation.Y;
+                        housingItem.Z = newLocation.Z;
+                    }
+                }
 
                 if (gameObj != null)
                 {
-
-                    location = new Vector3(gameObj->X, gameObj->Y, gameObj->Z);
-
-                    newLocation = Vector3.Transform(location - PlotLocation.ToVector(), rotateVector);
-
-                    housingItem.X = newLocation.X;
-                    housingItem.Y = newLocation.Y;
-                    housingItem.Z = newLocation.Z;
+                    housingItem.ItemStruct = (IntPtr)gameObj->Item;
                 }
-            }
 
-            if (gameObj != null)
-            {
-                housingItem.ItemStruct = (IntPtr)gameObj->Item;
+                ExteriorItemList.Add(housingItem);
             }
-
-            ExteriorItemList.Add(housingItem);
         }
-
         Config.Save();
     }
 
