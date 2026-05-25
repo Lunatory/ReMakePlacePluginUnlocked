@@ -2,7 +2,7 @@
 using ECommons.DalamudServices;
 using System;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
 // based on https://github.com/Caraxi/SimpleTweaksPlugin/blob/main/Helper/HookWrapper.cs
 public interface IHookWrapper : IDisposable

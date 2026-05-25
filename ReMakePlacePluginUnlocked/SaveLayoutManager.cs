@@ -1,7 +1,7 @@
 using ECommons.DalamudServices;
 using FFXIVClientStructs.FFXIV.Client.Game.MJI;
 using Lumina.Excel.Sheets;
-using ReMakePlacePlugin.Objects;
+using ReMakePlacePluginUnlocked.Objects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,9 +13,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
-using static ReMakePlacePlugin.ReMakePlacePlugin;
+using static ReMakePlacePluginUnlocked.ReMakePlacePluginUnlocked;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
 public class Transform
 {
@@ -167,14 +167,14 @@ public class ObjectToInferredTypesConverter : JsonConverter<object>
 public class SaveLayoutManager
 {
     public static Configuration Config;
-    public static ReMakePlacePlugin Plugin;
+    public static ReMakePlacePluginUnlocked Plugin;
 
     public static List<(Color, uint)> ColorList;
     private static Dictionary<string, Item> _itemsByName;
     private static Dictionary<uint, Item> _itemsById;
     private static bool _cacheInitialized = false;
 
-    public SaveLayoutManager(ReMakePlacePlugin plugin, Configuration config)
+    public SaveLayoutManager(ReMakePlacePluginUnlocked plugin, Configuration config)
     {
         Config = config;
         Plugin = plugin;

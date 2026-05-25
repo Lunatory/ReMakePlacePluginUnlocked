@@ -3,7 +3,7 @@ using ECommons.DalamudServices;
 using System;
 using System.Collections.Generic;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
 [Serializable]
 public class Configuration : IPluginConfiguration

@@ -8,17 +8,17 @@ using Dalamud.Utility;
 using ECommons.DalamudServices;
 using ECommons.MathHelpers;
 using Lumina.Excel.Sheets;
-using ReMakePlacePlugin.Objects;
+using ReMakePlacePluginUnlocked.Objects;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
-using static ReMakePlacePlugin.Gui.UiHelpers;
-using static ReMakePlacePlugin.ReMakePlacePlugin;
+using static ReMakePlacePluginUnlocked.Gui.UiHelpers;
+using static ReMakePlacePluginUnlocked.ReMakePlacePluginUnlocked;
 
-namespace ReMakePlacePlugin.Gui;
+namespace ReMakePlacePluginUnlocked.Gui;
 
 public class ConfigurationWindow : Window, IDisposable
 {
@@ -30,9 +30,9 @@ public class ConfigurationWindow : Window, IDisposable
 
     private FileDialogManager FileDialogManager { get; }
     public Configuration Config { get; init; }
-    public ReMakePlacePlugin Plugin { get; init; }
+    public ReMakePlacePluginUnlocked Plugin { get; init; }
 
-    public ConfigurationWindow(ReMakePlacePlugin plugin)
+    public ConfigurationWindow(ReMakePlacePluginUnlocked plugin)
         : base($"ReMakePlace v{Assembly.GetExecutingAssembly().GetName().Version}###ReMakePlacePlugin", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
     {
         Plugin = plugin;
@@ -120,9 +120,9 @@ public class ConfigurationWindow : Window, IDisposable
 
     private bool CheckModeForSave()
     {
-        if (Memory.Instance.IsHousingMode()) return true;
+        if (Memory.Instance.GetCurrentTerritory() != Memory.HousingArea.None) return true;
 
-        LogError("Unable to save layouts outside of Layout mode");
+        LogError("Unable to save layouts outside of a housing area");
         LogLayoutMode();
         return false;
     }
@@ -175,7 +175,7 @@ public class ConfigurationWindow : Window, IDisposable
         try
         {
             Plugin.GetGameLayout();
-            ReMakePlacePlugin.LayoutManager.ExportLayout();
+            ReMakePlacePluginUnlocked.LayoutManager.ExportLayout();
         }
         catch (Exception e)
         {
@@ -430,7 +430,7 @@ public class ConfigurationWindow : Window, IDisposable
         menuDimensions.X);
 
         var ctrlKeyPressed = ImGui.GetIO().KeyCtrl;
-        var dyeingItems = ReMakePlacePlugin.CurrentlyDyeingItems;
+        var dyeingItems = ReMakePlacePluginUnlocked.CurrentlyDyeingItems;
 
         DrawMainMenuButton(dyeingItems ? "Stop Dyeing" : "Apply Dyes", () =>
         {

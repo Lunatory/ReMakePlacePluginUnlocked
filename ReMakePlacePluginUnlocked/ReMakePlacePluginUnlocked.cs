@@ -12,22 +12,22 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using Lumina.Excel.Sheets;
-using ReMakePlacePlugin.Objects;
-using ReMakePlacePlugin.Util;
+using ReMakePlacePluginUnlocked.Objects;
+using ReMakePlacePluginUnlocked.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using static ReMakePlacePlugin.Memory;
+using static ReMakePlacePluginUnlocked.Memory;
 using AtkValueType = FFXIVClientStructs.FFXIV.Component.GUI.AtkValueType;
 using HousingFurniture = Lumina.Excel.Sheets.HousingFurniture;
 using TaskManager = ECommons.Automation.NeoTaskManager.TaskManager;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
-public class ReMakePlacePlugin : IDalamudPlugin
+public class ReMakePlacePluginUnlocked : IDalamudPlugin
 {
     public string Name => $"ReMakePlace Plugin v{Assembly.GetExecutingAssembly().GetName().Version}";
 
@@ -75,7 +75,7 @@ public class ReMakePlacePlugin : IDalamudPlugin
 
     private TaskManager TaskManager;
 
-    public ReMakePlacePlugin(IDalamudPluginInterface pi)
+    public ReMakePlacePluginUnlocked(IDalamudPluginInterface pi)
     {
         ECommonsMain.Init(pi, this);
 

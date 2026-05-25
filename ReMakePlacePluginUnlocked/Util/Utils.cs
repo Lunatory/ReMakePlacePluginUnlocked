@@ -1,13 +1,13 @@
 ﻿using Dalamud.Bindings.ImGui;
 using Lumina.Excel.Sheets;
-using ReMakePlacePlugin.Objects;
+using ReMakePlacePluginUnlocked.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
 public static class Utils
 {

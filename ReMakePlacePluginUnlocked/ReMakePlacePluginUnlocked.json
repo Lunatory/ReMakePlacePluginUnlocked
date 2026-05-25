@@ -1,7 +1,7 @@
 {
   "Author": "ReMakePlace Maintainers",
-  "Name": "ReMakePlace Plugin",
-  "InternalName": "ReMakePlacePlugin",
+  "Name": "ReMakePlace Plugin Unlocked",
+  "InternalName": "ReMakePlacePluginUnlocked",
   "Description": "Automatically save & load interior and exterior house layouts. Import/export layouts from the ReMakePlace program.",
   "RepoUrl": "https://github.com/ReMakePlace/plugin",
   "Tags": [

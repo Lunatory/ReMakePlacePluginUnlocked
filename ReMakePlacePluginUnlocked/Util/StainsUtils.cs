@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ReMakePlacePlugin.Util;
+namespace ReMakePlacePluginUnlocked.Util;
 
 /// <summary>
 /// Represents the combined callback values for shade and stain when dyeing.

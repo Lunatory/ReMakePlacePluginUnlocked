@@ -4,7 +4,7 @@ using Dalamud.Interface.Textures;
 using ECommons.DalamudServices;
 using System.Numerics;
 
-namespace ReMakePlacePlugin.Gui;
+namespace ReMakePlacePluginUnlocked.Gui;
 
 public static class UiHelpers
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-namespace ReMakePlacePlugin.Util;
+namespace ReMakePlacePluginUnlocked.Util;
 
 struct Location
 {

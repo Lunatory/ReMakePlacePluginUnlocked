@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
-using static ReMakePlacePlugin.ReMakePlacePlugin;
+using static ReMakePlacePluginUnlocked.ReMakePlacePluginUnlocked;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
 public unsafe class Memory
 {

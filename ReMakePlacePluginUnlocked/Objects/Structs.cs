@@ -3,7 +3,7 @@ using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
 public enum SortType
 {
@@ -196,7 +196,7 @@ public struct LayoutManager
             // return Marshal.PtrToStructure<HousingController>(_housingController);
             // return *(HousingController*) _housingController;
 
-            return global::ReMakePlacePlugin.HousingController.Get(_housingController);
+            return global::ReMakePlacePluginUnlocked.HousingController.Get(_housingController);
         }
     }
 
@@ -205,7 +205,7 @@ public struct LayoutManager
         get
         {
             if (_indoorAreaData == IntPtr.Zero) return null;
-            return global::ReMakePlacePlugin.IndoorAreaData.Get(_indoorAreaData);
+            return global::ReMakePlacePluginUnlocked.IndoorAreaData.Get(_indoorAreaData);
         }
     }
 }

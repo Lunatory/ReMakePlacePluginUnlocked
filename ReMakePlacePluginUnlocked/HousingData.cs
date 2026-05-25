@@ -3,7 +3,7 @@ using Lumina.Excel.Sheets;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
 public class HousingData
 {
@@ -23,7 +23,7 @@ public class HousingData
     private readonly Dictionary<ushort, uint> _extraLargeFishprint;
     private readonly Dictionary<ushort, uint> _painting;
 
-    private static ReMakePlacePlugin Plugin;
+    private static ReMakePlacePluginUnlocked Plugin;
 
     private HousingData()
     {
@@ -99,7 +99,7 @@ public class HousingData
         }
     }
 
-    public static void Init(ReMakePlacePlugin plugin)
+    public static void Init(ReMakePlacePluginUnlocked plugin)
     {
         Plugin = plugin;
         Instance = new HousingData();

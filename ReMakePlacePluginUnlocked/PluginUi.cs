@@ -1,18 +1,18 @@
 ﻿using Dalamud.Interface.Windowing;
 using ECommons.DalamudServices;
-using ReMakePlacePlugin.Gui;
+using ReMakePlacePluginUnlocked.Gui;
 using System;
 
-namespace ReMakePlacePlugin;
+namespace ReMakePlacePluginUnlocked;
 
 public class PluginUi : IDisposable
 {
-    private readonly ReMakePlacePlugin _plugin;
+    private readonly ReMakePlacePluginUnlocked _plugin;
 
     public readonly WindowSystem WindowSystem = new("ReMakePlace");
     public ConfigurationWindow ConfigWindow { get; }
 
-    public PluginUi(ReMakePlacePlugin plugin)
+    public PluginUi(ReMakePlacePluginUnlocked plugin)
     {
         _plugin = plugin;
 
