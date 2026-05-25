@@ -4,7 +4,7 @@
   "InternalName": "ReMakePlacePluginUnlocked",
   "AssemblyVersion": "7.5.1.0",
   "TestingAssemblyVersion": "7.5.1.0",
-  "Punchline": "Automatically save & load furniture layouts in your house.",
+  "Punchline": "Automatically save & load furniture layouts in any house.",
   "Description": "Automatically save & load the positions of house furniture. Import/export layouts from the ReMakePlace program.",
   "ApplicableVersion": "any",
   "RepoUrl": "https://github.com/ReMakePlace/plugin",
