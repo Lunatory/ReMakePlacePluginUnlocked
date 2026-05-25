@@ -29,7 +29,7 @@ namespace ReMakePlacePluginUnlocked;
 
 public class ReMakePlacePluginUnlocked : IDalamudPlugin
 {
-    public string Name => $"ReMakePlace Plugin v{Assembly.GetExecutingAssembly().GetName().Version}";
+    public string Name => $"ReMakePlace Unlocked Plugin v{Assembly.GetExecutingAssembly().GetName().Version}";
 
     private string[] commandNames = ["remakeplace", "rmp", "makeplace"];
     public PluginUi Gui { get; private set; }
@@ -120,7 +120,7 @@ public class ReMakePlacePluginUnlocked : IDalamudPlugin
 
         TaskManager = new TaskManager(taskManagerConfig);
 
-        Svc.Log.Info($"ReMakePlace Plugin v{Assembly.GetExecutingAssembly().GetName().Version} initialized");
+        Svc.Log.Info($"ReMakePlace Unlocked Plugin v{Assembly.GetExecutingAssembly().GetName().Version} initialized");
     }
 
     public unsafe void Initialize()

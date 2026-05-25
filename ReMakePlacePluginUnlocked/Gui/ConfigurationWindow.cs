@@ -33,7 +33,7 @@ public class ConfigurationWindow : Window, IDisposable
     public ReMakePlacePluginUnlocked Plugin { get; init; }
 
     public ConfigurationWindow(ReMakePlacePluginUnlocked plugin)
-        : base($"ReMakePlace v{Assembly.GetExecutingAssembly().GetName().Version}###ReMakePlacePlugin", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
+        : base($"ReMakePlace Unlocked v{Assembly.GetExecutingAssembly().GetName().Version}###ReMakePlacePlugin", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
     {
         Plugin = plugin;
         Config = plugin.Config;
